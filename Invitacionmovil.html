@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación a Tossa de Mar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f9fa;
+    }
+
+    .sorpresas-flex {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    #sec4 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-height: 100%;
+    }
+
+    #sec4 .contenido-centrado {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+    }
+
+    .section {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.8s ease;
+      width: 250px;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      pointer-events: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+
+    .section h2 {
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+
+    .section img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .hero {
+      background: url('https://images.pling.com/img/00/00/63/59/42/1637406/8663911d2070c01d5853b4202262e9ed49e2257d6dffb12b21c99d180ee2483db93e.jpg') center/cover no-repeat;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+      font-family: 'Playfair Display', serif;
+    }
+
+    #countdown {
+      font-size: 2em;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #ffffffdd;
+      color: #333;
+      padding: 12px 24px;
+      border: none;
+      font-size: 1.1em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #fff;
+    }
+
+    .section {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+      padding: 60px 20px;
+      text-align: center;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      height: auto;
+    }
+
+    .section h2 {
+      font-size: 2em;
+      margin-bottom: 0.5em;
+    }
+
+    .section img {
+      max-width: 90%;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* --- Media Queries para móviles --- */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+
+      #countdown {
+        font-size: 1.5em;
+      }
+
+      .btn {
+        padding: 10px 18px;
+        font-size: 1em;
+      }
+
+      .section {
+        width: 90% !important; /* Ancho adaptado a pantalla */
+        padding: 30px 15px !important;
+      }
+
+      .section h2 {
+        font-size: 1.5em;
+      }
+
+      .section img {
+        max-width: 100%;
+        margin-top: 15px;
+      }
+
+      .sorpresas-flex {
+        gap: 15px;
+      }
+
+      .hero {
+        padding: 15px;
+        height: auto;
+        min-height: 60vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <h1>Prepárate para nuestra mini aventura en las costas</h1>
+    <div id="countdown">Cargando cuenta regresiva...</div>
+
+    <script>
+      const target = new Date('2025-08-12T11:00:00');
+
+      function updateTimer() {
+        const now = new Date();
+        const diff = target - now;
+        if (diff <= 0) {
+          document.getElementById('countdown').innerHTML = '¡Ya estamos de viaje 🖤!';
+          clearInterval(interval);
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const mins = Math.floor((diff / (1000 * 60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        document.getElementById('countdown').innerHTML =
+          `${days} días ${hours} h ${mins} m ${secs} s`;
+      }
+
+      const interval = setInterval(updateTimer, 1000);
+      updateTimer();
+
+      function mostrarSorpresas() {
+        const btn = document.querySelector('.btn');
+        const sections = document.querySelectorAll('.section');
+        btn.style.display = 'none';
+
+        sections.forEach((sec, i) => {
+          setTimeout(() => {
+            sec.classList.add('visible');
+          }, i * 400);
+        });
+      }
+    </script>
+
+    <div id="contenido-inicial">
+      <button class="btn" onclick="mostrarSorpresas()">Ver sorpresas</button>
+    </div>
+  </div>
+
+  <div id="sorpresas" class="sorpresas-flex">
+    <div class="section" id="sec1">
+      <h2>Llegar al hotel</h2>
+      <img src="https://hotelviladetossa.com/images/verano/paginas/page-home/galeria/destacadas/carousel-home-hotel-vila-de-tossa-02.webp" alt="Foto del hotel">
+    </div>
+    <div class="section" id="sec2">
+      <h2>Disfrutar de la playa</h2>
+      <img src="https://media.istockphoto.com/id/467513886/es/foto/tossa-de-mar-costa-brava-espa%C3%B1a.jpg?s=612x612&w=0&k=20&c=cJmAYK-AGgrc9o8Ud6I3RflzojfgrqkG7-w0lHxQPUw=" alt="Foto de la playa">
+    </div>
+    <div class="section" id="sec3">
+      <h2>Crear momentos inolvidables</h2>
+      <img src="file:///C:/Users/jonat/Downloads/ChatGPT%20Image%202%20abr%202025,%2016_43_01.png" alt="Foto nuestra">
+    </div> 
+    <div class="section" id="sec4">
+      <div class="contenido-centrado">
+        <h2>Objetivos del viaje</h2>
+        <ul style="list-style: none; padding: 0; color: #fff; font-family: 'Playfair Display', serif; font-size: 1em; line-height: 1.6; text-align: center;">
+          <li>Empacar lo necesario</li>
+          <li>Probar comida local</li>
+          <li>Hacernos una foto en el mirador</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
