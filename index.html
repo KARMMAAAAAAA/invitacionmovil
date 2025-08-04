@@ -1,39 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Invitación a Tossa de Mar</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body, html {
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-      overflow-x: hidden; /* Evitar scroll horizontal */
+      height: 100%;
     }
 
     .hero {
       background: url('https://images.pling.com/img/00/00/63/59/42/1637406/8663911d2070c01d5853b4202262e9ed49e2257d6dffb12b21c99d180ee2483db93e.jpg') center/cover no-repeat;
-      height: 100vh;
-      color: white;
+      min-height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+      justify-content: center;
       text-align: center;
+      color: white;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
       padding: 20px;
     }
 
+    .contenido-inicial {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .contenido-inicial.oculto {
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+    }
+
     h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
+      font-size: 2.2em;
       font-family: 'Playfair Display', serif;
+      margin-bottom: 0.5em;
     }
 
     #countdown {
-      font-size: 1.5em;
+      font-size: 1.3em;
       font-family: 'Playfair Display', serif;
       margin-bottom: 20px;
     }
@@ -53,86 +68,82 @@
       background: #fff;
     }
 
-    /* Contenedor de las tarjetas, oculto al inicio */
-    #sorpresas {
+    #tarjetas {
       display: none;
-      padding: 20px;
-      background: #222;
-      color: white;
-      font-family: 'Playfair Display', serif;
-      min-height: 100vh;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      max-width: 400px;
+      margin-top: 20px;
+      z-index: 2;
     }
 
-    /* Tarjetas en vertical */
     .section {
+      backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.1);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
       border-radius: 16px;
       padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       text-align: center;
-      backdrop-filter: blur(10px);
-      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .section h2 {
-      font-size: 1.5em;
+      font-size: 1.4em;
       margin-bottom: 10px;
-      color: #fff;
+      font-family: 'Playfair Display', serif;
     }
 
     .section img {
       width: 100%;
-      max-width: 400px;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-top: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
 
-    /* Lista en la última tarjeta */
     #sec4 ul {
       list-style: none;
       padding: 0;
-      font-size: 1.1em;
+      font-size: 1em;
       line-height: 1.6;
-      color: #fff;
-      text-align: center;
     }
 
     #sec4 ul li {
-      margin: 10px 0;
+      margin: 8px 0;
     }
-
   </style>
 </head>
 <body>
 
-  <div class="hero" id="hero">
-    <h1>Prepárate para nuestra mini aventura en las costas</h1>
-    <div id="countdown">Cargando cuenta regresiva...</div>
-    <button class="btn" onclick="mostrarSorpresas()">Ver sorpresas</button>
-  </div>
+  <div class="hero">
+    <div class="contenido-inicial" id="contenido-inicial">
+      <h1>Prepárate para nuestra mini aventura en las costas</h1>
+      <div id="countdown">Cargando cuenta regresiva...</div>
+      <button class="btn" onclick="mostrarTarjetas()">Ver sorpresas</button>
+    </div>
 
-  <div id="sorpresas">
-    <div class="section" id="sec1">
-      <h2>Llegar al hotel</h2>
-      <img src="https://hotelviladetossa.com/images/verano/paginas/page-home/galeria/destacadas/carousel-home-hotel-vila-de-tossa-02.webp" alt="Foto del hotel">
-    </div>
-    <div class="section" id="sec2">
-      <h2>Disfrutar de la playa</h2>
-      <img src="https://media.istockphoto.com/id/467513886/es/foto/tossa-de-mar-costa-brava-espa%C3%B1a.jpg?s=612x612&w=0&k=20&c=cJmAYK-AGgrc9o8Ud6I3RflzojfgrqkG7-w0lHxQPUw=" alt="Foto de la playa">
-    </div>
-    <div class="section" id="sec3">
-      <h2>Crear momentos inolvidables</h2>
-      <!-- Cambia la URL por la que tengas en la web -->
-      <img src="https://i.imgur.com/tuImagen.jpg" alt="Foto nuestra">
-    </div>
-    <div class="section" id="sec4">
-      <h2>Objetivos del viaje</h2>
-      <ul>
-        <li>Empacar lo necesario</li>
-        <li>Probar comida local</li>
-        <li>Hacernos una foto en el mirador</li>
-      </ul>
+    <div id="tarjetas">
+      <div class="section" id="sec1">
+        <h2>Llegar al hotel</h2>
+        <img src="https://hotelviladetossa.com/images/verano/paginas/page-home/galeria/destacadas/carousel-home-hotel-vila-de-tossa-02.webp" alt="Hotel">
+      </div>
+      <div class="section" id="sec2">
+        <h2>Disfrutar de la playa</h2>
+        <img src="https://media.istockphoto.com/id/467513886/es/foto/tossa-de-mar-costa-brava-espa%C3%B1a.jpg?s=612x612&w=0&k=20&c=cJmAYK-AGgrc9o8Ud6I3RflzojfgrqkG7-w0lHxQPUw=" alt="Playa">
+      </div>
+      <div class="section" id="sec3">
+        <h2>Crear momentos inolvidables</h2>
+        <img src="https://imgur.com/a/bnN1vnY" alt="Foto nuestra">
+      </div>
+      <div class="section" id="sec4">
+        <h2>Objetivos del viaje</h2>
+        <ul>
+          <li>Empacar lo necesario</li>
+          <li>Probar comida local</li>
+          <li>Hacernos una foto en el mirador</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -159,13 +170,21 @@
     const interval = setInterval(updateTimer, 1000);
     updateTimer();
 
-    function mostrarSorpresas() {
-      document.getElementById('hero').style.display = 'none';
-      document.getElementById('sorpresas').style.display = 'block';
+    function mostrarTarjetas() {
+      const contenido = document.getElementById('contenido-inicial');
+      const tarjetas = document.getElementById('tarjetas');
+
+      contenido.classList.add('oculto');
+      setTimeout(() => {
+        contenido.style.display = 'none';
+        tarjetas.style.display = 'flex';
+      }, 500);
     }
   </script>
 
 </body>
 </html>
+
+
 
 
